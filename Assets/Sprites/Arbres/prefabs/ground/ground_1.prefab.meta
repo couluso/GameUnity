@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bdda8e6d6bf0f9348badaecb2a534eca
+timeCreated: 1509294378
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 103686
+  packageName: 2D beauty pack
+  packageVersion: 1.0
+  assetPath: Assets/2d beauty pack/prefabs/ground/ground_1.prefab
+  uploadId: 208955
