@@ -29,12 +29,17 @@ public class Movements : MonoBehaviour
         player = GameObject.Find("Player");
         controller = player.GetComponent<CharacterController>();
         options = GameObject.Find("Options");
-        options.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (enpause == false)
+        
+            options.SetActive(false);
+        
+        else
+            options.SetActive(true);
 
         // Déplacements perso
         float deltaTime = Time.deltaTime;

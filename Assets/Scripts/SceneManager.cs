@@ -4,15 +4,19 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    private GameObject controller;
-    private GameObject options;
-    private Movements movements;
+    public GameObject controller;
+    public GameObject options;
+    public Movements movements;
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Jeu")
+        {
         controller = GameObject.Find("Controller");
         movements = controller.GetComponent<Movements>();
         options = GameObject.Find("Options");
+
+        }
     }
 
     public void LoadSceneByName(string sceneName)
