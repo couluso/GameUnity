@@ -15,10 +15,24 @@ public class EnemySpawner : MonoBehaviour
     [Header("Group Settings")]
     [SerializeField] private float groupRadius = 2f;
 
+
+    private GameObject controller;
+    private Movements movements;
+
     private float timer;
+
+    private void Start()
+    {
+        controller = GameObject.Find("Controller");
+        movements = controller.GetComponent<Movements>();
+    }
+
 
     private void Update()
     {
+
+        if (movements.enpause == false)
+        {
         if (player == null || enemyPrefab == null)
             return;
 
@@ -29,10 +43,15 @@ public class EnemySpawner : MonoBehaviour
             timer = 0f;
             SpawnWave();
         }
+
+        }
+
     }
 
     private void SpawnWave()
     {
+
+
         int currentEnemies =
             GameObject.FindGameObjectsWithTag("Enemy").Length;
 

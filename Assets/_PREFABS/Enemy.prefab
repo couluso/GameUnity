@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4126240139160487465}
   - component: {fileID: 1156128189901022144}
   - component: {fileID: 4247244581706553544}
-  - component: {fileID: 9057216796901690725}
   - component: {fileID: 4230965283005096708}
   - component: {fileID: 7985856679503852300}
+  - component: {fileID: 9057216796901690725}
   - component: {fileID: 6672639942770479331}
   m_Layer: 0
   m_Name: Enemy
@@ -94,19 +94,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &9057216796901690725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1693336267117228589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47e7e816b89390f40b73f0b390629ea0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyFollow
-  moveSpeed: 3
 --- !u!54 &4230965283005096708
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -157,6 +144,20 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9057216796901690725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693336267117228589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e7e816b89390f40b73f0b390629ea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyFollow
+  moveSpeed: 3
+  script: {fileID: 0}
 --- !u!114 &6672639942770479331
 MonoBehaviour:
   m_ObjectHideFlags: 0

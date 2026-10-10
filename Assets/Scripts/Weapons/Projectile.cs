@@ -9,6 +9,15 @@ public class Projectile : MonoBehaviour
     private Rigidbody rb;
     private bool launched;
 
+    private GameObject controller;
+    public Movements script;
+
+    private void Start()
+    {
+        controller = GameObject.Find("Controller");
+        script = controller.GetComponent<Movements>();
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -19,8 +28,15 @@ public class Projectile : MonoBehaviour
             RigidbodyConstraints.FreezeRotation;
     }
 
+    private void Update()
+    {
+
+    }
+
+
     public void Launch(Vector3 direction)
     {
+
         direction.y = 0f;
 
         if (direction.sqrMagnitude < 0.001f)
@@ -31,9 +47,10 @@ public class Projectile : MonoBehaviour
 
         direction.Normalize();
         rb.linearVelocity = direction * speed;
+        
         launched = true;
-
         Destroy(gameObject, lifetime);
+        
     }
 
     private void OnTriggerEnter(Collider other)

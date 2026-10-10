@@ -10,44 +10,60 @@ public class WeaponAuto : MonoBehaviour
 
     private float timer;
 
+
+    private GameObject controller;
+    public Movements script;
+
+
+    private void Start()
+    {
+        controller = GameObject.Find("Controller");
+        script = controller.GetComponent<Movements>();
+    }
+
     private void Update()
     {
-        timer += Time.deltaTime;
-
-        if (timer < attackInterval)
-            return;
-
-        EnemyHealth target = FindNearestEnemy();
-
-        if (target == null)
-            return;
-
-        timer = 0f;
-
-        Vector3 direction =
-            target.transform.position - firePoint.position;
-
-        direction.y = 0f;
-
-        GameObject shot = Instantiate(
-            projectilePrefab,
-            firePoint.position,
-            Quaternion.identity
-        );
-
-        Projectile projectile = shot.GetComponent<Projectile>();
-
-        if (projectile != null)
+        if (script.enpause == false)
         {
-            projectile.Launch(direction);
-        }
-        else
-        {
-            Destroy(shot);
-            Debug.LogError(
-                "Le prefab du projectile ne possède pas le script Projectile."
+            timer += Time.deltaTime;
+
+            if (timer < attackInterval)
+                return;
+
+            EnemyHealth target = FindNearestEnemy();
+
+            if (target == null)
+                return;
+
+            timer = 0f;
+
+            Vector3 direction =
+                target.transform.position - firePoint.position;
+
+            direction.y = 0f;
+
+            GameObject shot = Instantiate(
+                projectilePrefab,
+                firePoint.position,
+                Quaternion.identity
             );
+
+            Projectile projectile = shot.GetComponent<Projectile>();
+
+            if (projectile != null)
+            {
+                projectile.Launch(direction);
+            }
+            else
+            {
+                Destroy(shot);
+                Debug.LogError(
+                    "Le prefab du projectile ne possède pas le script Projectile."
+                );
+            }
+
         }
+        
     }
 
     private EnemyHealth FindNearestEnemy()

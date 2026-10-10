@@ -39,4 +39,16 @@ public class SceneLoader : MonoBehaviour
         options.SetActive(false);
         movements.enpause = false;
     }
+
+    public void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Jeu")
+        {
+            if (movements.HP <= 0)
+            {
+                SceneManager.LoadScene("EcranMort");
+            }
+        }
+
+    }
 }

@@ -10,6 +10,7 @@ public class Movements : MonoBehaviour
     private CharacterController controller;
     private GameObject player;
     private GameObject options;
+    private GameObject scenemng;
     private Vector3 movement = Vector3.zero;
 
     public bool enpause = false;
@@ -23,7 +24,10 @@ public class Movements : MonoBehaviour
 
     public float PlayerSpeed = 12f;
 
-    public int HP = 10;
+    public int HP = 100;
+
+    public bool invincibilite = false;
+    private bool attenteEnCours = false;
 
 
     private void Start()
@@ -80,9 +84,22 @@ public class Movements : MonoBehaviour
             }
 
         }
-
-
-
         controller.Move(movement * deltaMove);
+    
+        if (invincibilite && !attenteEnCours)
+        {
+            StartCoroutine(Attendre3Secondes());
+        }
+
+    }
+
+    IEnumerator Attendre3Secondes()
+    {
+        attenteEnCours = true;
+
+        yield return new WaitForSeconds(3f);
+
+        invincibilite = false;
+        attenteEnCours = false;
     }
 }

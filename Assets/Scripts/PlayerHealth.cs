@@ -1,43 +1,32 @@
+using JetBrains.Annotations;
+using System.Collections;
+using System.Data;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("Stats")]
-    [SerializeField] private int maxHealth = 10;
+    private GameObject player;
+    private GameObject slider;
+    
+    private Movements PV;
+    private Slider valeur;
 
-    [Header("Invulnerability")]
-    [SerializeField] private float invulnerabilityDuration = 1f;
-
-    private int currentHealth;
-    private float nextDamageTime;
-    private bool isDead;
-
-    private void Awake()
+    private void Start()
     {
-        currentHealth = maxHealth;
+        player = GameObject.Find("Controller");
+        slider = GameObject.Find("Slider");
+
+        PV = player.GetComponent<Movements>();
+        valeur = slider.GetComponent<Slider>();
+
+        valeur.maxValue = PV.HP;
     }
 
-    public void TakeDamage(int damage)
+
+    private void Update()
     {
-        if (isDead || Time.time < nextDamageTime)
-            return;
-
-        currentHealth = Mathf.Max(0, currentHealth - damage);
-        nextDamageTime = Time.time + invulnerabilityDuration;
-
-        Debug.Log(
-            $"Joueur : {currentHealth}/{maxHealth} PV"
-        );
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        isDead = true;
-        Debug.Log("Le joueur est mort !");
+        valeur.value = PV.HP;
     }
 }
