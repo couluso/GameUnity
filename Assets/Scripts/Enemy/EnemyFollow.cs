@@ -5,7 +5,17 @@ public class EnemyFollow : MonoBehaviour
     [SerializeField] private float moveSpeed = 2f;
 
     private Transform player;
+    private GameObject controller;
+    public Movements script;
     private Rigidbody rb;
+
+    private void Start()
+    {
+        GameObject target = GameObject.FindGameObjectWithTag("Player");
+        controller = GameObject.Find("Controller");
+        player = target.transform;
+        script = controller.GetComponent<Movements>();
+    }
 
     private void Awake()
     {
@@ -18,13 +28,6 @@ public class EnemyFollow : MonoBehaviour
             RigidbodyConstraints.FreezeRotation;
     }
 
-    private void Start()
-    {
-        GameObject target = GameObject.FindGameObjectWithTag("Player");
-
-        if (target != null)
-            player = target.transform;
-    }
 
     private void FixedUpdate()
     {

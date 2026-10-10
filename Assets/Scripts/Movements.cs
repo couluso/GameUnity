@@ -23,6 +23,8 @@ public class Movements : MonoBehaviour
 
     public float PlayerSpeed = 12f;
 
+    public int HP = 10;
+
 
     private void Start()
     {

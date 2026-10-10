@@ -16,10 +16,6 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damage;
 
-        Debug.Log(
-            $"{gameObject.name} : {currentHealth}/{maxHealth} PV"
-        );
-
         if (currentHealth <= 0)
         {
             Die();
