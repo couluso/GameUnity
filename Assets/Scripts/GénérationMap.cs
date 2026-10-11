@@ -14,9 +14,9 @@ public class GénérationMap : MonoBehaviour
 
     private void PlacerSapins()
     {
-        for (int x = 1; x < 150; x += 2)
+        for (int x = 1; x < 200; x += 2)
         {
-            for (int z = 1; z < 150; z += 5)
+            for (int z = 1; z < 200; z += 5)
             {
                 if (Random.Range(0, 20) == 0)
                 {

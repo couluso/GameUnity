@@ -8,8 +8,8 @@ public class PlayerExperience : MonoBehaviour
     public int currentXP = 0;
     public LevelUp levelUpMenu;
 
-    [SerializeField] private int baseXP = 5;
-    [SerializeField] private float xpMultiplier = 1.5f;
+    [SerializeField] private int baseXP = 0;
+    [SerializeField] private float xpMultiplier = 1.2f;
 
     private int xpToNextLevel;
 

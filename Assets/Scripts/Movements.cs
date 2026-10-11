@@ -95,7 +95,7 @@ public class Movements : MonoBehaviour
     {
         attenteEnCours = true;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
 
         invincibilite = false;
         attenteEnCours = false;

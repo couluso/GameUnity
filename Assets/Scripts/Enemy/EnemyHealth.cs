@@ -3,14 +3,16 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [Header("Stats")]
-    [SerializeField] private int maxHealth = 3;
+    [SerializeField] public int maxHealth = 3;
     [SerializeField] private GameObject Orb;
+    [SerializeField] private GameObject OrbPlus;
+    [SerializeField] private int x;
 
-
-    private int currentHealth;
+    public int currentHealth;
 
     private void Awake()
     {
+        x = Random.Range(0, 4);
         currentHealth = maxHealth;
     }
 
@@ -26,7 +28,15 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        Instantiate(Orb, transform.position, Quaternion.identity);
+        if (x != 1)
+        {
+            Instantiate(Orb, transform.position, Quaternion.identity);
+        }
+        else if (x == 1)
+        {
+            Instantiate(OrbPlus, transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject);
     }
 }

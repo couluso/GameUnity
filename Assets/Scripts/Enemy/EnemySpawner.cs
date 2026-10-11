@@ -5,6 +5,8 @@ public class EnemySpawner : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform player;
+    [SerializeField] private EnemyHealth health;
+    [SerializeField] private EnemyFollow speed;
 
     [Header("Spawn Settings")]
     [SerializeField] private float spawnRadius = 10f;
@@ -46,6 +48,12 @@ public class EnemySpawner : MonoBehaviour
             if (playerObject != null)
                 player = playerObject.transform;
         }
+
+        health = enemyPrefab.GetComponent<EnemyHealth>();
+        speed = enemyPrefab.GetComponent<EnemyFollow>();
+
+        health.maxHealth = 3;
+        speed.moveSpeed = 2f;
     }
 
     private void Update()
@@ -63,7 +71,8 @@ public class EnemySpawner : MonoBehaviour
         {
             waveTimer = 0f;
             currentWave++;
-
+            health.maxHealth++;
+            speed.moveSpeed =+2f;
             Debug.Log("Vague " + currentWave);
         }
 

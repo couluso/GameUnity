@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e7e816b89390f40b73f0b390629ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFollow
-  moveSpeed: 3
+  moveSpeed: 2
   script: {fileID: 0}
 --- !u!114 &6672639942770479331
 MonoBehaviour:
@@ -172,3 +172,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 3
   Orb: {fileID: 8990543341852359888, guid: bb484525d0340d74390007cb5d348687, type: 3}
+  OrbPlus: {fileID: 8990543341852359888, guid: 1f0977e764abb6748872bde31378e7f7, type: 3}
+  x: 0
