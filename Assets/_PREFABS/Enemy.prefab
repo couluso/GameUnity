@@ -171,3 +171,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 3
+  Orb: {fileID: 8990543341852359888, guid: bb484525d0340d74390007cb5d348687, type: 3}

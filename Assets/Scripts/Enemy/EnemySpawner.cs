@@ -10,85 +10,124 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float spawnRadius = 10f;
     [SerializeField] private float spawnInterval = 3f;
     [SerializeField] private int enemiesPerWave = 5;
+    [SerializeField] private int enemiesIncreasePerWave = 2;
     [SerializeField] private int maxEnemies = 100;
 
-    [Header("Group Settings")]
+    [Header("Wave Settings")]
+    [SerializeField] private float waveDuration = 20f;
+
+    [Header("Big Groups")]
     [SerializeField] private float groupRadius = 2f;
+    [SerializeField] private float bigGroupChance = 0.25f;
+    [SerializeField] private int bigGroupMin = 10;
+    [SerializeField] private int bigGroupMax = 15;
 
-
-    private GameObject controller;
     private Movements movements;
 
-    private float timer;
+    private float spawnTimer;
+    private float waveTimer;
+
+    private int currentWave = 1;
 
     private void Start()
     {
-        controller = GameObject.Find("Controller");
-        movements = controller.GetComponent<Movements>();
-    }
+        GameObject controller = GameObject.Find("Controller");
 
+        if (controller != null)
+        {
+            movements = controller.GetComponent<Movements>();
+        }
+
+        if (player == null)
+        {
+            GameObject playerObject =
+                GameObject.FindGameObjectWithTag("Player");
+
+            if (playerObject != null)
+                player = playerObject.transform;
+        }
+    }
 
     private void Update()
     {
-
-        if (movements.enpause == false)
-        {
         if (player == null || enemyPrefab == null)
             return;
 
-        timer += Time.deltaTime;
+        if (movements != null && movements.enpause)
+            return;
 
-        if (timer >= spawnInterval)
+        // Faire progresser les vagues avec le temps
+        waveTimer += Time.deltaTime;
+
+        if (waveTimer >= waveDuration)
         {
-            timer = 0f;
-            SpawnWave();
+            waveTimer = 0f;
+            currentWave++;
+
+            Debug.Log("Vague " + currentWave);
         }
 
-        }
+        // Faire apparaître les ennemis régulièrement
+        spawnTimer += Time.deltaTime;
 
+        if (spawnTimer >= spawnInterval)
+        {
+            spawnTimer = 0f;
+            SpawnEnemies();
+        }
     }
 
-    private void SpawnWave()
+    private void SpawnEnemies()
     {
-
-
         int currentEnemies =
             GameObject.FindGameObjectsWithTag("Enemy").Length;
 
         int availableSlots = maxEnemies - currentEnemies;
-        int count = Mathf.Min(enemiesPerWave, availableSlots);
 
-        if (count <= 0)
+        if (availableSlots <= 0)
             return;
 
-        // Choisir un point aléatoire autour du joueur sur le plan XZ
-        Vector2 randomDirection = Random.insideUnitCircle.normalized;
+        // Le nombre normal augmente avec chaque vague
+        int count = enemiesPerWave
+            + (currentWave - 1) * enemiesIncreasePerWave;
 
-        if (randomDirection.sqrMagnitude < 0.01f)
-            randomDirection = Vector2.up;
+        // Parfois, faire apparaître un gros groupe
+        if (Random.value < bigGroupChance)
+        {
+            count = Random.Range(bigGroupMin, bigGroupMax + 1);
+        }
+
+        count = Mathf.Min(count, availableSlots);
+
+        // Choisir une direction autour du joueur
+        Vector2 direction = Random.insideUnitCircle.normalized;
+
+        if (direction.sqrMagnitude < 0.01f)
+            direction = Vector2.up;
 
         Vector3 center = player.position + new Vector3(
-            randomDirection.x,
+            direction.x * spawnRadius,
             0f,
-            randomDirection.y
-        ) * spawnRadius;
+            direction.y * spawnRadius
+        );
 
-        // Faire apparaître le groupe autour de ce point
+        // Regrouper les ennemis autour du point choisi
         for (int i = 0; i < count; i++)
         {
-            Vector2 offset = Random.insideUnitCircle * groupRadius;
+            Vector2 offset =
+                Random.insideUnitCircle * groupRadius;
 
-            Vector3 spawnPosition = center + new Vector3(
+            Vector3 position = center + new Vector3(
                 offset.x,
                 0f,
                 offset.y
             );
 
-            spawnPosition.y = player.position.y;
+            position.y = player.position.y;
 
             GameObject enemy = Instantiate(
                 enemyPrefab,
-                spawnPosition,
+                position,
                 Quaternion.identity
             );
 

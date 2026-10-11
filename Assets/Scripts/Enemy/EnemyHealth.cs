@@ -4,6 +4,8 @@ public class EnemyHealth : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] private int maxHealth = 3;
+    [SerializeField] private GameObject Orb;
+
 
     private int currentHealth;
 
@@ -24,6 +26,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        Instantiate(Orb, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

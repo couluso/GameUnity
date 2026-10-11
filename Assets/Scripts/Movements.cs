@@ -25,6 +25,7 @@ public class Movements : MonoBehaviour
     public float PlayerSpeed = 12f;
 
     public int HP = 100;
+    public int MaxHP = 100;
 
     public bool invincibilite = false;
     private bool attenteEnCours = false;
@@ -43,9 +44,6 @@ public class Movements : MonoBehaviour
         if (enpause == false)
         
             options.SetActive(false);
-        
-        else
-            options.SetActive(true);
 
         // Déplacements perso
         float deltaTime = Time.deltaTime;

@@ -33,6 +33,10 @@ public class Projectile : MonoBehaviour
 
     }
 
+    public void SetDamage(int newDamage)
+    {
+        damage = newDamage;
+    }
 
     public void Launch(Vector3 direction)
     {

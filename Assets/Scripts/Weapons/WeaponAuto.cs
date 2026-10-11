@@ -6,6 +6,7 @@ public class WeaponAuto : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float attackInterval = 1f;
+    [SerializeField] private int bonusDegats = 0;
     [SerializeField] private float range = 8f;
 
     private float timer;
@@ -49,6 +50,7 @@ public class WeaponAuto : MonoBehaviour
             );
 
             Projectile projectile = shot.GetComponent<Projectile>();
+            projectile.SetDamage(1 + bonusDegats);
 
             if (projectile != null)
             {
@@ -97,5 +99,18 @@ public class WeaponAuto : MonoBehaviour
         }
 
         return nearest;
+    }
+
+    public void AugmenterCadence()
+    {
+        attackInterval = Mathf.Max(
+            0.15f,
+            attackInterval * 0.8f
+        );
+    }
+
+    public void AugmenterDegats()
+    {
+        bonusDegats++;
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3496135902526943552}
   - component: {fileID: 2418473021969714623}
-  - component: {fileID: 5468512777932154600}
+  - component: {fileID: 2073186866561313432}
   m_Layer: 0
   m_Name: Grass
   m_TagString: Untagged
@@ -87,13 +87,13 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 50, y: 50}
+  m_Size: {x: 150, y: 150}
   m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
+  m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!65 &5468512777932154600
+--- !u!65 &2073186866561313432
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,5 +112,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 50, y: 50, z: 0}
+  m_Size: {x: 150, y: 150, z: 0.20000005}
   m_Center: {x: 0, y: 0, z: 0}
