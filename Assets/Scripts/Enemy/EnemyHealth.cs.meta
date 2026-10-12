@@ -5,6 +5,8 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - Orb: {fileID: 8990543341852359888, guid: bb484525d0340d74390007cb5d348687, type: 3}
+  - OrbPlus: {fileID: 8990543341852359888, guid: 1f0977e764abb6748872bde31378e7f7, type: 3}
+  - keyPrefab: {fileID: 7043847315311884406, guid: 3f444f98573e2e04194503ee9cebd136, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

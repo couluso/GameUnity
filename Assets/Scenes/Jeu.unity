@@ -2933,6 +2933,7 @@ MonoBehaviour:
   MaxHP: 100
   enpause: 0
   invincibilite: 0
+  "cl\xE9": 0
 --- !u!1 &1359264026
 GameObject:
   m_ObjectHideFlags: 0

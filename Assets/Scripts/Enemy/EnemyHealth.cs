@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public int maxHealth = 3;
     [SerializeField] private GameObject Orb;
     [SerializeField] private GameObject OrbPlus;
+    [SerializeField] private GameObject keyPrefab;
     [SerializeField] private int RNG;
 
     public int currentHealth;
@@ -32,19 +33,36 @@ public class EnemyHealth : MonoBehaviour
     }
 
     public void Die()
+{
+    if (CompareTag("Boss"))
     {
-        if (this.CompareTag("Enemy"))
+        if (keyPrefab != null)
         {
-            if (RNG != 1)
-            {
-                Instantiate(Orb, transform.position, Quaternion.identity);
-            }
-            else if (RNG == 1)
-            {
-                Instantiate(OrbPlus, transform.position, Quaternion.identity);
-            }
-        }
+            Instantiate(
+                keyPrefab,
+                transform.position,
+                Quaternion.identity
+            );
 
-        Destroy(gameObject);
+            Debug.Log("Le boss a lâché la clé !");
+        }
+        else
+        {
+            Debug.LogError("Le prefab de la clé n'est pas assigné !");
+        }
     }
+    else if (CompareTag("Enemy"))
+    {
+        if (RNG != 1)
+        {
+            Instantiate(Orb, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(OrbPlus, transform.position, Quaternion.identity);
+        }
+    }
+
+    Destroy(gameObject);
+}
 }

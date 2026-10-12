@@ -28,12 +28,14 @@ public class Movements : MonoBehaviour
     public int HP = 100;
 
     public int MaxHP = 100;
-    
+
     public bool enpause = false;
 
     public bool invincibilite = false;
     
     private bool attenteEnCours = false;
+
+    public bool clé = false;
 
 
     private void Start()

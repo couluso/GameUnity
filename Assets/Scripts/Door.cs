@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject Player;
+    public Movements playerKey;
+    public GameObject ManagerOBJ;
+    public SceneLoader SceneLoader;
+
+    private void Start()
     {
-        
+        Player = GameObject.Find("Controller");
+        playerKey = Player.GetComponent<Movements>();
+        ManagerOBJ = GameObject.Find("SceneManager");
+        SceneLoader = ManagerOBJ.GetComponent<SceneLoader>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter()
     {
-        
+        if (playerKey.clé == true)
+        {
+            SceneLoader.LoadSceneByName("EcranVictoire");
+        }
     }
 }
