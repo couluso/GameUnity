@@ -33,13 +33,16 @@ public class EnemyHealth : MonoBehaviour
 
     public void Die()
     {
-        if (RNG != 1)
+        if (this.CompareTag("Enemy"))
         {
-            Instantiate(Orb, transform.position, Quaternion.identity);
-        }
-        else if (RNG == 1)
-        {
-            Instantiate(OrbPlus, transform.position, Quaternion.identity);
+            if (RNG != 1)
+            {
+                Instantiate(Orb, transform.position, Quaternion.identity);
+            }
+            else if (RNG == 1)
+            {
+                Instantiate(OrbPlus, transform.position, Quaternion.identity);
+            }
         }
 
         Destroy(gameObject);

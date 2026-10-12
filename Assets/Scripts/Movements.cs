@@ -6,28 +6,33 @@ using UnityEngine;
 
 public class Movements : MonoBehaviour
 {
-
-    private CharacterController controller;
-    private GameObject player;
-    private GameObject options;
-    private GameObject scenemng;
-    private Vector3 movement = Vector3.zero;
-
-    public bool enpause = false;
-
-    //Mouvements
+    [Header("Keybinds")]
     [SerializeField] KeyCode forward = KeyCode.W;
     [SerializeField] KeyCode left = KeyCode.A;
     [SerializeField] KeyCode back = KeyCode.S;
     [SerializeField] KeyCode right = KeyCode.D;
     [SerializeField] KeyCode menu = KeyCode.Escape;
 
+    [Header("Références")]
+    private CharacterController controller;
+    private GameObject player;
+    private GameObject options;
+    private GameObject death;
+    private GameObject scenemng;
+    private Vector3 movement = Vector3.zero;
+
+    [Header("Valeurs")]
+
     public float PlayerSpeed = 12f;
 
     public int HP = 100;
+
     public int MaxHP = 100;
+    
+    public bool enpause = false;
 
     public bool invincibilite = false;
+    
     private bool attenteEnCours = false;
 
 
@@ -36,6 +41,7 @@ public class Movements : MonoBehaviour
         player = GameObject.Find("Player");
         controller = player.GetComponent<CharacterController>();
         options = GameObject.Find("Options");
+        death = GameObject.Find("Death");
     }
 
     // Update is called once per frame
@@ -44,6 +50,10 @@ public class Movements : MonoBehaviour
         if (enpause == false)
         
             options.SetActive(false);
+
+        if (HP > 0)
+
+            death.SetActive(false);
 
         // Déplacements perso
         float deltaTime = Time.deltaTime;
@@ -87,6 +97,12 @@ public class Movements : MonoBehaviour
         if (invincibilite && !attenteEnCours)
         {
             StartCoroutine(Attendre3Secondes());
+        }
+
+        if (HP <= 0)
+        {
+            enpause = true;
+            death.SetActive(true);
         }
 
     }
