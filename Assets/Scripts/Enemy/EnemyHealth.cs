@@ -6,13 +6,18 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] public int maxHealth = 3;
     [SerializeField] private GameObject Orb;
     [SerializeField] private GameObject OrbPlus;
-    [SerializeField] private int x;
+    [SerializeField] private int RNG;
 
     public int currentHealth;
 
     private void Awake()
     {
-        x = Random.Range(0, 4);
+        if (transform.position.x < 0 || transform.position.z < 0 || transform.position.x > 200 || transform.position.z > 200)
+        {
+            Destroy(gameObject);
+        }
+
+        RNG = Random.Range(0, 10);
         currentHealth = maxHealth;
     }
 
@@ -26,13 +31,13 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    private void Die()
+    public void Die()
     {
-        if (x != 1)
+        if (RNG != 1)
         {
             Instantiate(Orb, transform.position, Quaternion.identity);
         }
-        else if (x == 1)
+        else if (RNG == 1)
         {
             Instantiate(OrbPlus, transform.position, Quaternion.identity);
         }

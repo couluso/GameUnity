@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private EnemyHealth health;
     [SerializeField] private EnemyFollow speed;
+    [SerializeField] private GameObject bossPrefab;
 
     [Header("Spawn Settings")]
     [SerializeField] private float spawnRadius = 10f;
@@ -29,7 +30,8 @@ public class EnemySpawner : MonoBehaviour
     private float spawnTimer;
     private float waveTimer;
 
-    private int currentWave = 1;
+    public int currentWave = 1;
+    private bool finDesVagues = false;
 
     private void Start()
     {
@@ -64,15 +66,28 @@ public class EnemySpawner : MonoBehaviour
         if (movements != null && movements.enpause)
             return;
 
+        if (finDesVagues)
+            return;
+
         // Faire progresser les vagues avec le temps
         waveTimer += Time.deltaTime;
 
         if (waveTimer >= waveDuration)
         {
             waveTimer = 0f;
+
+            if (currentWave >= 15)
+            {
+                TerminerVagues();
+                return;
+            }
+
             currentWave++;
+
             health.maxHealth++;
-            speed.moveSpeed =+2f;
+
+            speed.moveSpeed += 2f;
+
             Debug.Log("Vague " + currentWave);
         }
 
@@ -132,7 +147,7 @@ public class EnemySpawner : MonoBehaviour
                 offset.y
             );
 
-            position.y = player.position.y;
+            position.y = 1;
 
             GameObject enemy = Instantiate(
                 enemyPrefab,
@@ -141,6 +156,48 @@ public class EnemySpawner : MonoBehaviour
             );
 
             enemy.tag = "Enemy";
+        }
+    }
+
+    private void TerminerVagues()
+    {
+        finDesVagues = true;
+
+        Debug.Log("Fin de la vague 15 !");
+
+        EnemyHealth[] ennemis =
+            FindObjectsOfType<EnemyHealth>();
+
+        foreach (EnemyHealth ennemi in ennemis)
+        {
+            if (ennemi != null)
+            {
+                ennemi.Die();
+            }
+        }
+
+        if (bossPrefab != null && player != null)
+        {
+            Vector3 positionBoss = player.position
+                + player.forward * 5f;
+
+            positionBoss.y = player.position.y;
+
+            GameObject boss = Instantiate(
+                bossPrefab,
+                positionBoss,
+                Quaternion.identity
+            );
+
+            boss.tag = "Boss";
+
+            Debug.Log("Le boss est apparu !");
+        }
+        else
+        {
+            Debug.LogError(
+                "BossPrefab ou Player non assigné dans EnemySpawner !"
+            );
         }
     }
 }

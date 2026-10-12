@@ -36,9 +36,8 @@ public class EnemyFollow : MonoBehaviour
             {
                 script.HP -= 4;
                 script.invincibilite = true;
-                Destroy(gameObject);
             }
-            else
+            if (this.CompareTag("Enemy"))
                 Destroy(gameObject);
         }
 
