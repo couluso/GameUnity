@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int RNG;
 
     public int currentHealth;
+    public BossHealthBarUI bossHealthBarUI;
 
     private void Awake()
     {
@@ -37,16 +38,7 @@ public class EnemyHealth : MonoBehaviour
 {
     if (CompareTag("Boss"))
     {
-        if (keyPrefab != null)
-        {
             Instantiate(keyPrefab,new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
-
-            Debug.Log("Le boss a lâché la clé !");
-        }
-        else
-        {
-            Debug.LogError("Le prefab de la clé n'est pas assigné !");
-        }
     }
     else if (CompareTag("Enemy"))
     {
@@ -60,6 +52,11 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    Destroy(gameObject);
+        if (CompareTag("Boss") && bossHealthBarUI != null)
+        {
+            bossHealthBarUI.MasquerBoss();
+        }
+
+        Destroy(gameObject);
 }
 }

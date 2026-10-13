@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private EnemyHealth health;
     [SerializeField] private EnemyFollow speed;
     [SerializeField] private GameObject bossPrefab;
+    [SerializeField] private BossHealthBarUI bossHealthBarUI;
 
     [Header("Spawn Settings")]
     [SerializeField] private float spawnRadius = 10f;
@@ -56,7 +57,6 @@ public class EnemySpawner : MonoBehaviour
         speed = enemyPrefab.GetComponent<EnemyFollow>();
 
         health.maxHealth = 3;
-        speed.moveSpeed = 2f;
     }
 
     private void Update()
@@ -88,8 +88,6 @@ public class EnemySpawner : MonoBehaviour
             health.maxHealth++;
 
             speed.moveSpeed += 2f;
-
-            Debug.Log("Vague " + currentWave);
         }
 
         // Faire apparaître les ennemis régulièrement
@@ -185,9 +183,17 @@ public class EnemySpawner : MonoBehaviour
             Vector3 positionBoss = player.position + player.forward * 5f;
             Quaternion rotation45X = Quaternion.Euler(45f, 0f, 0f);
 
-            GameObject boss = Instantiate(bossPrefab, new Vector3(100, 1, 100), rotation45X);
+            GameObject boss = Instantiate(bossPrefab,new Vector3(100, 1, 100),rotation45X);
 
             boss.tag = "Boss";
+
+            EnemyHealth bossHealth = boss.GetComponent<EnemyHealth>();
+
+            if (bossHealth != null && bossHealthBarUI != null)
+            {
+                bossHealthBarUI.AfficherBoss(bossHealth);
+                bossHealth.bossHealthBarUI = bossHealthBarUI;
+            }
 
             Debug.Log("Le boss est apparu !");
         }

@@ -12,6 +12,7 @@ public class PlayerExperience : MonoBehaviour
     [SerializeField] private float xpMultiplier = 1.2f;
 
     private int xpToNextLevel;
+    public int XPToNextLevel => xpToNextLevel;
 
     private void Start()
     {

@@ -2,18 +2,22 @@ using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
-    [SerializeField] public float moveSpeed = 2f;
+    [SerializeField] public float moveSpeed;
 
     private Transform player;
     private GameObject controller;
+    private GameObject Manager;
     public Movements script;
+    public EnemySpawner spawner;
     private Rigidbody rb;
 
     private void Start()
     {
         GameObject target = GameObject.FindGameObjectWithTag("Player");
         controller = GameObject.Find("Controller");
+        Manager = GameObject.Find("GameManager");
         script = controller.GetComponent<Movements>();
+        spawner = Manager.GetComponent<EnemySpawner>();
         player = target.transform;
     }
 
@@ -25,6 +29,8 @@ public class EnemyFollow : MonoBehaviour
         rb.constraints =
             RigidbodyConstraints.FreezePositionY |
             RigidbodyConstraints.FreezeRotation;
+        
+        moveSpeed = 4f;
     }
 
     private void OnTriggerEnter(Collider other)

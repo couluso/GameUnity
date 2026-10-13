@@ -156,8 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e7e816b89390f40b73f0b390629ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFollow
-  moveSpeed: 1.5
+  moveSpeed: 4
   script: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!114 &6672639942770479331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,9 +171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd71fe297d02daa428bcf9727d6224c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 1
+  maxHealth: 300
   Orb: {fileID: 8990543341852359888, guid: bb484525d0340d74390007cb5d348687, type: 3}
   OrbPlus: {fileID: 8990543341852359888, guid: 1f0977e764abb6748872bde31378e7f7, type: 3}
   keyPrefab: {fileID: 7043847315311884406, guid: 3f444f98573e2e04194503ee9cebd136, type: 3}
   RNG: 0
   currentHealth: 0
+  bossHealthBarUI: {fileID: 0}
