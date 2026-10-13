@@ -13,7 +13,7 @@ public class WaveUI : MonoBehaviour
         {
             waveText.text = "Vague "
                 + enemySpawner.currentWave
-                + " / 15";
+                + " / 12";
         }
     }
 }

@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
-    [SerializeField] public float moveSpeed;
+    [SerializeField] public float moveSpeed; 
+    public int degats = 4;
+    public int augmentationDegatsParVague = 1;
 
     private Transform player;
     private GameObject controller;
@@ -30,7 +32,7 @@ public class EnemyFollow : MonoBehaviour
             RigidbodyConstraints.FreezePositionY |
             RigidbodyConstraints.FreezeRotation;
         
-        moveSpeed = 4f;
+        moveSpeed = 2f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,7 +42,7 @@ public class EnemyFollow : MonoBehaviour
 
             if (script.invincibilite == false)
             {
-                script.HP -= 4;
+                script.HP -= degats;
                 script.invincibilite = true;
             }
             if (this.CompareTag("Enemy"))

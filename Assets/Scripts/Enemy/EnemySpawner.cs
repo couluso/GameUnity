@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private EnemyFollow speed;
     [SerializeField] private GameObject bossPrefab;
     [SerializeField] private BossHealthBarUI bossHealthBarUI;
+    [SerializeField] private int augmentationDegatsParVague = 1;
 
     [Header("Spawn Settings")]
     [SerializeField] private float spawnRadius = 10f;
@@ -18,14 +19,14 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int maxEnemies = 100;
 
     [Header("Wave Settings")]
-    [SerializeField] private float waveDuration = 20f;
+    [SerializeField] private float waveDuration = 15f;
     [SerializeField] public KeyCode VagueBoss = KeyCode.M;
 
     [Header("Big Groups")]
     [SerializeField] private float groupRadius = 2f;
-    [SerializeField] private float bigGroupChance = 0.25f;
-    [SerializeField] private int bigGroupMin = 10;
-    [SerializeField] private int bigGroupMax = 15;
+    [SerializeField] private float bigGroupChance = 0.33f;
+    [SerializeField] private int bigGroupMin = 15;
+    [SerializeField] private int bigGroupMax = 25;
 
     private Movements movements;
 
@@ -77,7 +78,7 @@ public class EnemySpawner : MonoBehaviour
         {
             waveTimer = 0f;
 
-            if (currentWave >= 15)
+            if (currentWave == 12)
             {
                 TerminerVagues();
                 return;
