@@ -7,6 +7,8 @@ public class Door : MonoBehaviour
     public GameObject ManagerOBJ;
     public SceneLoader SceneLoader;
 
+    public GameObject TexteNON;
+
     private void Start()
     {
         Player = GameObject.Find("Controller");
@@ -15,11 +17,22 @@ public class Door : MonoBehaviour
         SceneLoader = ManagerOBJ.GetComponent<SceneLoader>();
     }
 
-    private void OnTriggerEnter()
+    private void OnTriggerEnter(Collider other)
     {
-        if (playerKey.clé == true)
+        if (other.CompareTag("Player"))
         {
-            SceneLoader.LoadSceneByName("EcranVictoire");
+            if (playerKey.clé == true)
+            {
+                SceneLoader.LoadSceneByName("EcranVictoire");
+            }
+            else
+            {
+                TexteNON.SetActive(true);
+            }
         }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        TexteNON.SetActive(false);
     }
 }

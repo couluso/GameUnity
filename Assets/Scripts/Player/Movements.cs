@@ -12,11 +12,13 @@ public class Movements : MonoBehaviour
     [SerializeField] KeyCode back = KeyCode.S;
     [SerializeField] KeyCode right = KeyCode.D;
     [SerializeField] KeyCode menu = KeyCode.Escape;
+    //[SerializeField] KeyCode cheat = KeyCode.Space;
 
     [Header("Références")]
     private CharacterController controller;
     private GameObject player;
     private GameObject options;
+    public AudioSource audio;
     private GameObject death;
     private GameObject scenemng;
     private Vector3 movement = Vector3.zero;
@@ -36,12 +38,14 @@ public class Movements : MonoBehaviour
     private bool attenteEnCours = false;
 
     public bool clé = false;
+    public bool dead = false;
 
 
     private void Start()
     {
         player = GameObject.Find("Player");
         controller = player.GetComponent<CharacterController>();
+        audio = GetComponent<AudioSource>();
         options = GameObject.Find("Options");
         death = GameObject.Find("Death");
     }
@@ -49,6 +53,7 @@ public class Movements : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (enpause == false)
         
             options.SetActive(false);
@@ -94,18 +99,27 @@ public class Movements : MonoBehaviour
             }
 
         }
-        controller.Move(movement * deltaMove);
     
         if (invincibilite && !attenteEnCours)
         {
             StartCoroutine(Attendre3Secondes());
         }
 
-        if (HP <= 0)
+        if (HP <= 0 && !dead)
         {
             enpause = true;
+            dead = true;
+            HP=0;
             death.SetActive(true);
+            audio.Play();
         }
+
+        if (dead)
+        {
+            controller.Move(Vector3.zero);
+        }
+        else
+            controller.Move(movement * deltaMove);
 
     }
 
@@ -113,7 +127,7 @@ public class Movements : MonoBehaviour
     {
         attenteEnCours = true;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
 
         invincibilite = false;
         attenteEnCours = false;

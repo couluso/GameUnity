@@ -156,7 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e7e816b89390f40b73f0b390629ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFollow
-  moveSpeed: 4
+  moveSpeed: 10
+  degats: 4
+  augmentationDegatsParVague: 1
   script: {fileID: 0}
   spawner: {fileID: 0}
 --- !u!114 &6672639942770479331

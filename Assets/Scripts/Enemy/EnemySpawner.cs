@@ -12,21 +12,21 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int augmentationDegatsParVague = 1;
 
     [Header("Spawn Settings")]
-    [SerializeField] private float spawnRadius = 10f;
-    [SerializeField] private float spawnInterval = 3f;
-    [SerializeField] private int enemiesPerWave = 5;
-    [SerializeField] private int enemiesIncreasePerWave = 2;
-    [SerializeField] private int maxEnemies = 100;
+    [SerializeField] private float spawnRadius = 1f;
+    [SerializeField] private float spawnInterval = 2f;
+    [SerializeField] private int enemiesPerWave = 10;
+    [SerializeField] private int enemiesIncreasePerWave = 5;
+    [SerializeField] private int maxEnemies = 1000;
 
     [Header("Wave Settings")]
     [SerializeField] private float waveDuration = 15f;
-    [SerializeField] public KeyCode VagueBoss = KeyCode.M;
+    //[SerializeField] public KeyCode VagueBoss = KeyCode.M;
 
     [Header("Big Groups")]
-    [SerializeField] private float groupRadius = 2f;
-    [SerializeField] private float bigGroupChance = 0.33f;
-    [SerializeField] private int bigGroupMin = 15;
-    [SerializeField] private int bigGroupMax = 25;
+    [SerializeField] private float groupRadius = 1f;
+    [SerializeField] private float bigGroupChance = 1f;
+    [SerializeField] private int bigGroupMin = 20;
+    [SerializeField] private int bigGroupMax = 40;
 
     private Movements movements;
 
@@ -78,7 +78,7 @@ public class EnemySpawner : MonoBehaviour
         {
             waveTimer = 0f;
 
-            if (currentWave == 12)
+            if (currentWave == 11)
             {
                 TerminerVagues();
                 return;
@@ -88,7 +88,20 @@ public class EnemySpawner : MonoBehaviour
 
             health.maxHealth++;
 
-            speed.moveSpeed += 2f;
+            // Calculer la vitesse correspondant à la vague
+            float nouvelleVitesse = Mathf.Min(2f + (currentWave - 1) * 0.5f,8f);
+
+            // Appliquer la vitesse à tous les ennemis existants
+            EnemyFollow[] ennemis =
+                FindObjectsOfType<EnemyFollow>();
+
+            foreach (EnemyFollow ennemi in ennemis)
+            {
+                if (ennemi != null)
+                {
+                    ennemi.moveSpeed = nouvelleVitesse;
+                }
+            }
         }
 
         // Faire apparaître les ennemis régulièrement
@@ -100,8 +113,8 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemies();
         }
 
-        if (Input.GetKeyDown(VagueBoss))
-            TerminerVagues();
+        //if (Input.GetKeyDown(VagueBoss))
+          //  TerminerVagues();
     }
 
     private void SpawnEnemies()
@@ -159,6 +172,8 @@ public class EnemySpawner : MonoBehaviour
             );
 
             enemy.tag = "Enemy";
+
+            EnemyFollow ennemiScript = enemy.GetComponent<EnemyFollow>();
         }
     }
 

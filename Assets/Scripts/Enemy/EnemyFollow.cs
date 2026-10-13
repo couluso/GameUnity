@@ -54,23 +54,25 @@ public class EnemyFollow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (script.enpause == true)
-            moveSpeed = 0f;
-        else
-            moveSpeed = 2f;
-        
-        
-        if (player == null)
-            return;
 
-            // Direction uniquement sur le plan XZ
+        if (script.enpause)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            return;
+        }
+
+        if (player == null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            return;
+        }
+
+        // Direction uniquement sur le plan XZ
         Vector3 direction = player.position - rb.position;
         direction.y = 0f;
         direction.Normalize();
 
         rb.linearVelocity = direction * moveSpeed;
-
-        
-        
     }
 }
