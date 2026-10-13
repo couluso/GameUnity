@@ -2553,6 +2553,7 @@ MonoBehaviour:
   enemiesIncreasePerWave: 2
   maxEnemies: 200
   waveDuration: 20
+  VagueBoss: 110
   groupRadius: 100
   bigGroupChance: 0.25
   bigGroupMin: 10

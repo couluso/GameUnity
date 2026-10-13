@@ -18,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Wave Settings")]
     [SerializeField] private float waveDuration = 20f;
+    [SerializeField] public KeyCode VagueBoss = KeyCode.M;
 
     [Header("Big Groups")]
     [SerializeField] private float groupRadius = 2f;
@@ -99,6 +100,9 @@ public class EnemySpawner : MonoBehaviour
             spawnTimer = 0f;
             SpawnEnemies();
         }
+
+        if (Input.GetKeyDown(VagueBoss))
+            TerminerVagues();
     }
 
     private void SpawnEnemies()
@@ -178,16 +182,10 @@ public class EnemySpawner : MonoBehaviour
 
         if (bossPrefab != null && player != null)
         {
-            Vector3 positionBoss = player.position
-                + player.forward * 5f;
+            Vector3 positionBoss = player.position + player.forward * 5f;
+            Quaternion rotation45X = Quaternion.Euler(45f, 0f, 0f);
 
-            positionBoss.y = player.position.y;
-
-            GameObject boss = Instantiate(
-                bossPrefab,
-                positionBoss,
-                Quaternion.identity
-            );
+            GameObject boss = Instantiate(bossPrefab, new Vector3(100, 1, 100), rotation45X);
 
             boss.tag = "Boss";
 

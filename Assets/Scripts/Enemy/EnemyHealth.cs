@@ -15,7 +15,8 @@ public class EnemyHealth : MonoBehaviour
     {
         if (transform.position.x < 0 || transform.position.z < 0 || transform.position.x > 200 || transform.position.z > 200)
         {
-            Destroy(gameObject);
+            if (this.CompareTag("Enemy"))
+                Destroy(gameObject);
         }
 
         RNG = Random.Range(0, 10);
@@ -38,11 +39,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (keyPrefab != null)
         {
-            Instantiate(
-                keyPrefab,
-                transform.position,
-                Quaternion.identity
-            );
+            Instantiate(keyPrefab,new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
 
             Debug.Log("Le boss a lâché la clé !");
         }
